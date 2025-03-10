@@ -1,0 +1,6 @@
+@FeedbackApp.Identity_HostAddress = http://localhost:5057
+
+GET {{FeedbackApp.Identity_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

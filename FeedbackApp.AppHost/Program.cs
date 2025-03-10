@@ -1,19 +1,29 @@
-using k8s.Models;
 
 var builder = DistributedApplication.CreateBuilder(args);
 
 // RedisCache
-var cache = builder.AddRedis("cache").WithRedisCommander();
+var redis = builder.AddRedis("redis").WithRedisCommander();
 
-// Postgres DB
-var db = builder
-    .AddPostgres("db")
-    .WithPgAdmin()
+// Postgres
+var postgres = builder
+    .AddPostgres("postgres")
     .WithImageTag("latest")
+    .WithPgAdmin()
     .WithLifetime(ContainerLifetime.Persistent);
 
+// Database's
+var domainDb = postgres.AddDatabase("db");
+var identityDb = postgres.AddDatabase("identitydb");
+
+// Identity Server
+var identity = builder.AddProject<Projects.FeedbackApp_Identity>("identity")
+    .WithReference(identityDb)
+    .WithExternalHttpEndpoints();
+
+// Domain API
 var api = builder.AddProject<Projects.FeedbackApp_ApiService>("api")
-    .WithReference(db);
+    .WithReference(redis)
+    .WithReference(domainDb);
 
 // NEXTJS frontend
 var frontend = builder
@@ -21,7 +31,11 @@ var frontend = builder
     .WithNpmPackageInstallation()
     .WaitFor(api)
     .WithReference(api)
-    .WithHttpEndpoint(env: "PORT")
+    .WithReference(identity)
+    .WithHttpEndpoint(3000, env: "PORT")
+    //.WithHttpsEndpoint(env: "PORT")
     .WithExternalHttpEndpoints();
+
+builder.AddProject<Projects.FeedbackApp_Identity>("feedbackapp-identity");
 
 builder.Build().Run();
