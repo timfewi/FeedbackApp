@@ -1,4 +1,3 @@
-Danke für die detaillierten Antworten! Ich werde eine umfassende Projektplanung für deine Web-App erstellen. Diese wird folgende Aspekte umfassen:
 
 - **Use Cases**: Szenarien zur Nutzung der Anwendung
 - **Klassendiagramm**: Strukturelle Darstellung der wichtigsten Klassen und deren Beziehungen
@@ -7,8 +6,6 @@ Danke für die detaillierten Antworten! Ich werde eine umfassende Projektplanung
 - **Detaillierte Feature-Liste**: Funktionsumfang inklusive Drag-and-Drop Baukasten, Vorlagen, anonymisierte Teilnahme und AI-Analyse
 - **Sicherheits- & Datenschutzkonzept**: DSGVO-Konformität, Authentifizierung via Google Login
 - **Skalierbarkeit & Erweiterbarkeit**: Möglichkeiten zur API-Erweiterung und Mandantenfähigkeit
-
-Ich werde dich informieren, sobald die Planung bereit zur Durchsicht ist!
 
 ## Projektüberblick und Technologie-Stack  
 Diese Web-App ermöglicht die **Erstellung und Verwaltung von Feedback-Fragebögen**. Sie wird mit einem modernen **Full-Stack-Ansatz** umgesetzt: Ein Next.js 15 Frontend (React) für die Benutzeroberfläche kommuniziert mit einer ASP.NET Core 9 Web API als Backend. Persistente Daten (Fragebögen, Antworten, Nutzerkonten etc.) werden in einer **PostgreSQL**-Datenbank gespeichert. Zur **Orchestrierung** der Anwendungskomponenten in der Entwicklungsumgebung wird .NET **Aspire** verwendet. .NET Aspire erlaubt es, alle nötigen Ressourcen (Dienste, DB etc.) in einem App-Model zu definieren und lokal gemeinsam zu starten ([.NET Aspire orchestration overview - .NET Aspire | Microsoft Learn](https://learn.microsoft.com/en-us/dotnet/aspire/fundamentals/app-host-overview#:~:text=,isn%27t%20supported%20in%20production%20environments)). (Für Produktionsbetrieb würde man dagegen containerbasierte Orchestrierung oder Cloud-Services nutzen ([.NET Aspire orchestration overview - .NET Aspire | Microsoft Learn](https://learn.microsoft.com/en-us/dotnet/aspire/fundamentals/app-host-overview#:~:text=Note)).) Die folgende Tabelle gibt einen Überblick über den Stack:
